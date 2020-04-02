@@ -1,1 +1,17 @@
+spring:
+  application:
+    name: Hurriyet Emlak Todo Api
+  couchbase:
+    bootstrap-hosts: localhost
+    bucket:
+      name: todo-bucket
+      password: todo-bucket
+
+
+server:
+  port: 8082
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 1024
 
