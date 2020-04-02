@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TaskListGetUserListsResponse {
-    private Long taskId;
+    private String taskId;
     private String taskTitle;
     private Boolean taskFavorite;
 }

@@ -6,8 +6,6 @@ import com.couchbase.client.java.query.N1qlQueryRow;
 import com.couchbase.client.java.query.ParameterizedN1qlQuery;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hurriyetemlak.todoapp.todoapi.domain.TaskListDomain;
-import com.hurriyetemlak.todoapp.todoapi.domain.TaskListGetUserListsDomain;
-import com.hurriyetemlak.todoapp.todoapi.domain.TaskListUserListsDomain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.stereotype.Repository;
@@ -39,16 +37,16 @@ public class TaskListRepository {
         couchbaseTemplate.update(taskListDomain);
     }
 
-    public List<TaskListUserListsDomain> getUserTaskLists(TaskListGetUserListsDomain taskListGetUserListsDomain) {
+    public List<TaskListDomain> getUserTaskLists(String userId) {
         String query = "SELECT meta(f).id, f.* FROM `todo-bucket` AS f WHERE f.userId= $userId";
-        ParameterizedN1qlQuery parameterizedN1qlQuery = N1qlQuery.parameterized(query, JsonObject.create().put("email", taskListGetUserListsDomain.getUserId()));
-        Stream<TaskListUserListsDomain> userStream = couchbaseTemplate.queryN1QL(parameterizedN1qlQuery).allRows().stream().map(this::map);
+        ParameterizedN1qlQuery parameterizedN1qlQuery = N1qlQuery.parameterized(query, JsonObject.create().put("userId", userId));
+        Stream<TaskListDomain> userStream = couchbaseTemplate.queryN1QL(parameterizedN1qlQuery).allRows().stream().map(this::map);
         return userStream.collect(Collectors.toList());
     }
 
-    private TaskListUserListsDomain map(N1qlQueryRow n1qlQueryRow) {
+    private TaskListDomain map(N1qlQueryRow n1qlQueryRow) {
         try {
-            return objectMapper.readValue(n1qlQueryRow.byteValue(), TaskListUserListsDomain.class);
+            return objectMapper.readValue(n1qlQueryRow.byteValue(), TaskListDomain.class);
         } catch (Exception ex) {
             log.error("Could not parsed");
         }

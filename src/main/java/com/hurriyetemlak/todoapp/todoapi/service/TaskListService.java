@@ -2,11 +2,8 @@ package com.hurriyetemlak.todoapp.todoapi.service;
 
 import com.hurriyetemlak.todoapp.todoapi.converter.TaskListConverter;
 import com.hurriyetemlak.todoapp.todoapi.domain.TaskListDomain;
-import com.hurriyetemlak.todoapp.todoapi.domain.TaskListGetUserListsDomain;
-import com.hurriyetemlak.todoapp.todoapi.domain.TaskListUserListsDomain;
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListAddRequest;
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListDeleteItemRequest;
-import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListGetUserListsRequest;
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListUpdateRequest;
 import com.hurriyetemlak.todoapp.todoapi.model.response.TaskListGetUserListsResponse;
 import com.hurriyetemlak.todoapp.todoapi.repository.TaskListRepository;
@@ -41,9 +38,8 @@ public class TaskListService {
         taskListRepository.delete(taskListDomain);
     }
 
-    public List<TaskListGetUserListsResponse> getTaskLists(TaskListGetUserListsRequest taskListGetUserListsRequest) {
-        TaskListGetUserListsDomain taskListGetUserListsDomain = taskListConverter.convertRequestToDomain(taskListGetUserListsRequest);
-        List<TaskListUserListsDomain> taskListUserListsDomain = taskListRepository.getUserTaskLists(taskListGetUserListsDomain);
+    public List<TaskListGetUserListsResponse> getTaskLists(String userId) {
+        List<TaskListDomain> taskListUserListsDomain = taskListRepository.getUserTaskLists(userId);
         return taskListConverter.convertUserListToModelList(taskListUserListsDomain);
     }
 }

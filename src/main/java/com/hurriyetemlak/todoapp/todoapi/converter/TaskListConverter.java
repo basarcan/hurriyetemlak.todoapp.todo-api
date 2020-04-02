@@ -1,8 +1,6 @@
 package com.hurriyetemlak.todoapp.todoapi.converter;
 
 import com.hurriyetemlak.todoapp.todoapi.domain.TaskListDomain;
-import com.hurriyetemlak.todoapp.todoapi.domain.TaskListGetUserListsDomain;
-import com.hurriyetemlak.todoapp.todoapi.domain.TaskListUserListsDomain;
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListAddRequest;
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListDeleteItemRequest;
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListGetUserListsRequest;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class TaskListConverter {
@@ -51,13 +50,14 @@ public class TaskListConverter {
         return taskListDomain;
     }
 
-    public TaskListGetUserListsDomain convertRequestToDomain(TaskListGetUserListsRequest taskListGetUserListsRequest)
+    public List<TaskListGetUserListsResponse> convertUserListToModelList(List<TaskListDomain> taskListUserListsDomain)
     {
-        return null;
-    }
-
-    public List<TaskListGetUserListsResponse> convertUserListToModelList(List<TaskListUserListsDomain> taskListUserListsDomain)
-    {
-        return null;
+        return taskListUserListsDomain.stream().map(x -> {
+            TaskListGetUserListsResponse taskListGetUserListsResponse = new TaskListGetUserListsResponse();
+            taskListGetUserListsResponse.setTaskFavorite(x.getTaskFavorite());
+            taskListGetUserListsResponse.setTaskId(x.getId());
+            taskListGetUserListsResponse.setTaskTitle(x.getTaskTitle());
+            return taskListGetUserListsResponse;
+        }).collect(Collectors.toList());
     }
 }

@@ -41,9 +41,9 @@ public class TaskListController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<TaskListGetUserListsResponse> getTaskLists(@RequestBody TaskListGetUserListsRequest taskListGetUserListsRequest)
+    public List<TaskListGetUserListsResponse> getTaskLists(@RequestParam String userId)
     {
-        return taskListService.getTaskLists(taskListGetUserListsRequest);
+        return taskListService.getTaskLists(userId);
     }
 
 

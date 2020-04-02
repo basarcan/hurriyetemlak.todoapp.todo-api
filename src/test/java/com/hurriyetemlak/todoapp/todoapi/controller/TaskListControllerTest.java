@@ -100,26 +100,12 @@ public class TaskListControllerTest {
     public void it_should_return_task_lists_by_user() throws Exception
     {
         //given
-        TaskListGetUserListsRequest taskListGetUserListsRequest = new TaskListGetUserListsRequest();
-        taskListGetUserListsRequest.setUserId("0");
-
-        TaskListGetUserListsResponse model1 = new TaskListGetUserListsResponse();
-        model1.setTaskId(1L);
-        model1.setTaskTitle("firstTitle");
-        model1.setTaskFavorite(false);
-        TaskListGetUserListsResponse model2 = new TaskListGetUserListsResponse();
-        model2.setTaskId(2L);
-        model2.setTaskTitle("secondTitle");
-        model2.setTaskFavorite(false);
-
-        given(taskListService.getTaskLists(taskListGetUserListsRequest)).willReturn(Arrays.asList(model1,model2));
 
         //when
-        ResultActions resultActions = mockMvc.perform(get("/get-user-lists")
-                .content("{ \"userId\":\"0\"}")
+        ResultActions resultActions = mockMvc.perform(get("/get-user-lists?userId=0")
                 .contentType(MediaType.APPLICATION_JSON));
         //then
         resultActions.andExpect(status().isOk());
-        verify(taskListService).getTaskLists(any(TaskListGetUserListsRequest.class));
+        verify(taskListService).getTaskLists("0");
     }
 }
