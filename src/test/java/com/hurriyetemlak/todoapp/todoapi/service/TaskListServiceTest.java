@@ -35,8 +35,7 @@ public class TaskListServiceTest {
     private TaskListConverter taskListConverter;
 
     @Test
-    public void it_should_add_task_to_list()
-    {
+    public void it_should_add_task_to_list() {
         //given
         TaskListAddRequest taskListAddRequest = new TaskListAddRequest();
         taskListAddRequest.setUserId("0");
@@ -59,9 +58,9 @@ public class TaskListServiceTest {
         given(taskListConverter.convertAddRequest(taskListAddRequest)).willReturn(taskListDomain);
 
         //when
-         taskListService.addToList(taskListAddRequest);
+        taskListService.addToList(taskListAddRequest);
 
-         //then
+        //then
         ArgumentCaptor<TaskListDomain> addTaskToListDomainArgumentCaptor = ArgumentCaptor.forClass(TaskListDomain.class);
         verify(taskListRepository).save(addTaskToListDomainArgumentCaptor.capture());
         TaskListDomain addTaskToListArgumentCaptorValue = addTaskToListDomainArgumentCaptor.getValue();
@@ -71,12 +70,11 @@ public class TaskListServiceTest {
         assertThat(addTaskToListArgumentCaptorValue.getTaskType()).isEqualTo("taskType");
         assertThat(addTaskToListArgumentCaptorValue.getTaskPriority()).isEqualTo((byte) 0);
         assertThat(addTaskToListArgumentCaptorValue.getTaskFavorite()).isEqualTo(false);
-        assertThat(addTaskToListArgumentCaptorValue.getUserId()).isEqualTo(0L);
+        assertThat(addTaskToListArgumentCaptorValue.getUserId()).isEqualTo("0");
     }
 
     @Test
-    public void it_should_update_task_on_list()
-    {
+    public void it_should_update_task_on_list() {
         //given
         TaskListUpdateRequest taskListUpdateRequest = new TaskListUpdateRequest();
         taskListUpdateRequest.setId("0");
@@ -118,8 +116,7 @@ public class TaskListServiceTest {
     }
 
     @Test
-    public void it_should_delete_from_list()
-    {
+    public void it_should_delete_from_list() {
         //given
         TaskListDeleteItemRequest taskListDeleteItemRequest = new TaskListDeleteItemRequest();
         taskListDeleteItemRequest.setId("0");
@@ -136,35 +133,31 @@ public class TaskListServiceTest {
         ArgumentCaptor<TaskListDomain> TaskListDeleteDomainArgumentCaptor = ArgumentCaptor.forClass(TaskListDomain.class);
         verify(taskListRepository).delete(TaskListDeleteDomainArgumentCaptor.capture());
         TaskListDomain TaskListUpdateArgumentCaptorValue = TaskListDeleteDomainArgumentCaptor.getValue();
-        assertThat(TaskListUpdateArgumentCaptorValue.getId()).isEqualTo(0L);
+        assertThat(TaskListUpdateArgumentCaptorValue.getId()).isEqualTo("0");
     }
 
-  /*  @Test
-    public void it_should_return_task_lists_by_user()
-    {
+    @Test
+    public void it_should_return_task_lists_by_user() {
         //given
         TaskListGetUserListsRequest taskListGetUserListsRequest = new TaskListGetUserListsRequest();
         taskListGetUserListsRequest.setUserId("0");
 
-        TaskListGetUserListsDomain taskListGetUserListsDomain = new TaskListGetUserListsDomain();
-        taskListGetUserListsDomain.setUserId(0L);
-
-        TaskListUserListsDomain model1 = new TaskListUserListsDomain();
-        TaskListUserListsDomain model2 = new TaskListUserListsDomain();
-        model1.setTaskId(1L);
+        TaskListDomain model1 = new TaskListDomain();
+        TaskListDomain model2 = new TaskListDomain();
+        model1.setId("1");
         model1.setTaskTitle("firstTitle");
         model1.setTaskFavorite(false);
-        model2.setTaskId(2L);
+        model2.setId("2");
         model2.setTaskTitle("secondTitle");
         model2.setTaskFavorite(false);
-        List<TaskListUserListsDomain> taskListUserListsDomain = Arrays.asList(model1, model2);
+        List<TaskListDomain> taskListUserListsDomain = Arrays.asList(model1, model2);
 
         TaskListGetUserListsResponse model11 = new TaskListGetUserListsResponse();
         TaskListGetUserListsResponse model12 = new TaskListGetUserListsResponse();
-        model11.setTaskId(1L);
+        model11.setTaskId("1");
         model11.setTaskTitle("firstTitle");
         model11.setTaskFavorite(false);
-        model12.setTaskId(2L);
+        model12.setTaskId("2");
         model12.setTaskTitle("secondTitle");
         model12.setTaskFavorite(false);
         List<TaskListGetUserListsResponse> taskListGetUserListsResponseList = Arrays.asList(model11, model12);
@@ -179,14 +172,14 @@ public class TaskListServiceTest {
         List<TaskListGetUserListsResponse> taskListGetListsResponseListUser = taskListService.getTaskLists("0");
 
         //then
-        assertThat(taskListGetListsResponseListUser.get(0).getTaskId()).isEqualTo(1);
+        assertThat(taskListGetListsResponseListUser.get(0).getTaskId()).isEqualTo("1");
         assertThat(taskListGetListsResponseListUser.get(0).getTaskTitle()).isEqualTo("firstTitle");
         assertThat(taskListGetListsResponseListUser.get(0).getTaskFavorite()).isEqualTo(false);
 
-        assertThat(taskListGetListsResponseListUser.get(1).getTaskId()).isEqualTo(2);
+        assertThat(taskListGetListsResponseListUser.get(1).getTaskId()).isEqualTo("2");
         assertThat(taskListGetListsResponseListUser.get(1).getTaskTitle()).isEqualTo("secondTitle");
         assertThat(taskListGetListsResponseListUser.get(1).getTaskFavorite()).isEqualTo(false);
 
-    }*/
+    }
 
 }

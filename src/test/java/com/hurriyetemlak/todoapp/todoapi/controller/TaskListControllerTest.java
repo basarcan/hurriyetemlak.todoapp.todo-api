@@ -2,9 +2,7 @@ package com.hurriyetemlak.todoapp.todoapi.controller;
 
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListAddRequest;
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListDeleteItemRequest;
-import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListGetUserListsRequest;
 import com.hurriyetemlak.todoapp.todoapi.model.request.TaskListUpdateRequest;
-import com.hurriyetemlak.todoapp.todoapi.model.response.TaskListGetUserListsResponse;
 import com.hurriyetemlak.todoapp.todoapi.service.TaskListService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,16 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Arrays;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.mockito.BDDMockito.given;
+
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = TaskListController.class)
 public class TaskListControllerTest {
@@ -42,7 +35,7 @@ public class TaskListControllerTest {
 
 
         //when
-        ResultActions resultActions = mockMvc.perform(post("/add-to-list")
+        ResultActions resultActions = mockMvc.perform(post("/task")
                 .content("{\n" +
                         "  \"userId\": \"0\",\n" +
                         "  \"taskTitle\": \"taskTitle\",\n" +
@@ -64,7 +57,7 @@ public class TaskListControllerTest {
         //given
 
         //when
-        ResultActions resultActions = mockMvc.perform(put("/update-to-list")
+        ResultActions resultActions = mockMvc.perform(put("/task")
                 .content("{\n" +
                         "  \"id\": \"0\",\n" +
                         "  \"userId\": \"0\",\n" +
@@ -82,12 +75,11 @@ public class TaskListControllerTest {
     }
 
     @Test
-    public void it_should_delete_task_on_list() throws Exception
-    {
+    public void it_should_delete_task_on_list() throws Exception {
         //given
 
         //when
-        ResultActions resultActions = mockMvc.perform(delete("/delete-from-list")
+        ResultActions resultActions = mockMvc.perform(delete("/task")
                 .content("{ \"id\":\"0\"}")
                 .contentType(MediaType.APPLICATION_JSON));
 
@@ -97,12 +89,11 @@ public class TaskListControllerTest {
     }
 
     @Test
-    public void it_should_return_task_lists_by_user() throws Exception
-    {
+    public void it_should_return_task_lists_by_user() throws Exception {
         //given
 
         //when
-        ResultActions resultActions = mockMvc.perform(get("/get-user-lists?userId=0")
+        ResultActions resultActions = mockMvc.perform(get("/task?userId=0")
                 .contentType(MediaType.APPLICATION_JSON));
         //then
         resultActions.andExpect(status().isOk());
