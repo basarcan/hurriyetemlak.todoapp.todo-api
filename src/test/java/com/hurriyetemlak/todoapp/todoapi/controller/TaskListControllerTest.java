@@ -44,7 +44,7 @@ public class TaskListControllerTest {
         //when
         ResultActions resultActions = mockMvc.perform(post("/add-to-list")
                 .content("{\n" +
-                        "  \"userId\": 0,\n" +
+                        "  \"userId\": \"0\",\n" +
                         "  \"taskTitle\": \"taskTitle\",\n" +
                         "  \"taskSubject\": \"taskSubject\",\n" +
                         "  \"taskContent\": \"taskContent\",\n" +
@@ -66,8 +66,8 @@ public class TaskListControllerTest {
         //when
         ResultActions resultActions = mockMvc.perform(put("/update-to-list")
                 .content("{\n" +
-                        "  \"id\": 0,\n" +
-                        "  \"userId\": 0,\n" +
+                        "  \"id\": \"0\",\n" +
+                        "  \"userId\": \"0\",\n" +
                         "  \"taskTitle\": \"taskTitle\",\n" +
                         "  \"taskSubject\": \"taskSubject\",\n" +
                         "  \"taskContent\": \"taskContent\",\n" +
@@ -88,7 +88,7 @@ public class TaskListControllerTest {
 
         //when
         ResultActions resultActions = mockMvc.perform(delete("/delete-from-list")
-                .content("{ \"id\":0}")
+                .content("{ \"id\":\"0\"}")
                 .contentType(MediaType.APPLICATION_JSON));
 
         //then
@@ -101,7 +101,7 @@ public class TaskListControllerTest {
     {
         //given
         TaskListGetUserListsRequest taskListGetUserListsRequest = new TaskListGetUserListsRequest();
-        taskListGetUserListsRequest.setUserId(0L);
+        taskListGetUserListsRequest.setUserId("0");
 
         TaskListGetUserListsResponse model1 = new TaskListGetUserListsResponse();
         model1.setTaskId(1L);
@@ -116,7 +116,7 @@ public class TaskListControllerTest {
 
         //when
         ResultActions resultActions = mockMvc.perform(get("/get-user-lists")
-                .content("{ \"userId\":0}")
+                .content("{ \"userId\":\"0\"}")
                 .contentType(MediaType.APPLICATION_JSON));
         //then
         resultActions.andExpect(status().isOk());

@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TaskListUpdateRequest {
-    private Long id;
-    private Long userId;
+    private String id;
+    private String userId;
     private String taskTitle;
     private String taskSubject;
     private String taskContent;

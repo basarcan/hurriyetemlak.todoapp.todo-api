@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TaskListGetUserListsRequest {
-    private Long userId;
+    private String userId;
 }

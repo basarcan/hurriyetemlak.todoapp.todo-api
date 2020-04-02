@@ -17,8 +17,8 @@ import java.util.Date;
 public class TaskListDomain {
     @Id
     @GeneratedValue(strategy = GenerationStrategy.UNIQUE, delimiter = "__")
-    private Long id;
-    private Long userId;
+    private String id;
+    private String userId;
     private Date createdDate;
     private Date updatedDate;
     public String taskTitle;

@@ -21,7 +21,7 @@ public class TaskListConverterTest {
     public void it_should_convert_add_to_domain() {
         //given
         TaskListAddRequest taskListAddRequest = new TaskListAddRequest();
-        taskListAddRequest.setUserId(0L);
+        taskListAddRequest.setUserId("0");
         taskListAddRequest.setTaskTitle("taskTitle");
         taskListAddRequest.setTaskSubject("taskSubject");
         taskListAddRequest.setTaskContent("taskContent");
@@ -47,8 +47,8 @@ public class TaskListConverterTest {
     {
         //given
         TaskListUpdateRequest taskListUpdateRequest = new TaskListUpdateRequest();
-        taskListUpdateRequest.setId(0L);
-        taskListUpdateRequest.setUserId(0L);
+        taskListUpdateRequest.setId("0");
+        taskListUpdateRequest.setUserId("0");
         taskListUpdateRequest.setTaskTitle("taskTitle");
         taskListUpdateRequest.setTaskSubject("taskSubject");
         taskListUpdateRequest.setTaskContent("taskContent");
@@ -60,8 +60,8 @@ public class TaskListConverterTest {
         TaskListDomain taskListDomain = taskListConverter.convertUpdateRequest(taskListUpdateRequest);
 
         //then
-        assertThat(taskListDomain.getId()).isEqualTo(0L);
-        assertThat(taskListDomain.getUserId()).isEqualTo(0L);
+        assertThat(taskListDomain.getId()).isEqualTo("0");
+        assertThat(taskListDomain.getUserId()).isEqualTo("0");
         assertThat(taskListDomain.getTaskTitle()).isEqualTo("taskTitle");
         assertThat(taskListDomain.getTaskSubject()).isEqualTo("taskSubject");
         assertThat(taskListDomain.getTaskContent()).isEqualTo("taskContent");
@@ -75,7 +75,7 @@ public class TaskListConverterTest {
     {
         //given
         TaskListDeleteItemRequest taskListDeleteItemRequest = new TaskListDeleteItemRequest();
-        taskListDeleteItemRequest.setId(0L);
+        taskListDeleteItemRequest.setId("0");
 
         //when
         TaskListDomain taskListDomain = taskListConverter.convertDeleteRequest(taskListDeleteItemRequest);

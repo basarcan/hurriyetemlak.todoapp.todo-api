@@ -42,7 +42,7 @@ public class TaskListServiceTest {
     {
         //given
         TaskListAddRequest taskListAddRequest = new TaskListAddRequest();
-        taskListAddRequest.setUserId(0L);
+        taskListAddRequest.setUserId("0");
         taskListAddRequest.setTaskTitle("taskTitle");
         taskListAddRequest.setTaskSubject("taskSubject");
         taskListAddRequest.setTaskType("taskType");
@@ -51,7 +51,7 @@ public class TaskListServiceTest {
         taskListAddRequest.setTaskFavorite(false);
 
         TaskListDomain taskListDomain = new TaskListDomain();
-        taskListDomain.setUserId(0L);
+        taskListDomain.setUserId("0");
         taskListDomain.setTaskTitle("taskTitle");
         taskListDomain.setTaskSubject("taskSubject");
         taskListDomain.setTaskContent("taskContent");
@@ -82,8 +82,8 @@ public class TaskListServiceTest {
     {
         //given
         TaskListUpdateRequest taskListUpdateRequest = new TaskListUpdateRequest();
-        taskListUpdateRequest.setId(0L);
-        taskListUpdateRequest.setUserId(0L);
+        taskListUpdateRequest.setId("0");
+        taskListUpdateRequest.setUserId("0");
         taskListUpdateRequest.setTaskTitle("taskTitle");
         taskListUpdateRequest.setTaskSubject("taskSubject");
         taskListUpdateRequest.setTaskType("taskType");
@@ -92,8 +92,8 @@ public class TaskListServiceTest {
         taskListUpdateRequest.setTaskFavorite(false);
 
         TaskListDomain taskListDomain = new TaskListDomain();
-        taskListDomain.setId(0L);
-        taskListDomain.setUserId(0L);
+        taskListDomain.setId("0");
+        taskListDomain.setUserId("0");
         taskListDomain.setTaskTitle("taskTitle");
         taskListDomain.setTaskSubject("taskSubject");
         taskListDomain.setTaskContent("taskContent");
@@ -110,14 +110,14 @@ public class TaskListServiceTest {
         ArgumentCaptor<TaskListDomain> TaskListUpdateDomainArgumentCaptor = ArgumentCaptor.forClass(TaskListDomain.class);
         verify(taskListRepository).update(TaskListUpdateDomainArgumentCaptor.capture());
         TaskListDomain TaskListUpdateArgumentCaptorValue = TaskListUpdateDomainArgumentCaptor.getValue();
-        assertThat(TaskListUpdateArgumentCaptorValue.getId()).isEqualTo(0L);
+        assertThat(TaskListUpdateArgumentCaptorValue.getId()).isEqualTo("0");
         assertThat(TaskListUpdateArgumentCaptorValue.getTaskTitle()).isEqualTo("taskTitle");
         assertThat(TaskListUpdateArgumentCaptorValue.getTaskSubject()).isEqualTo("taskSubject");
         assertThat(TaskListUpdateArgumentCaptorValue.getTaskContent()).isEqualTo("taskContent");
         assertThat(TaskListUpdateArgumentCaptorValue.getTaskType()).isEqualTo("taskType");
         assertThat(TaskListUpdateArgumentCaptorValue.getTaskPriority()).isEqualTo((byte) 0);
         assertThat(TaskListUpdateArgumentCaptorValue.getTaskFavorite()).isEqualTo(false);
-        assertThat(TaskListUpdateArgumentCaptorValue.getUserId()).isEqualTo(0L);
+        assertThat(TaskListUpdateArgumentCaptorValue.getUserId()).isEqualTo("0");
     }
 
     @Test
@@ -125,10 +125,10 @@ public class TaskListServiceTest {
     {
         //given
         TaskListDeleteItemRequest taskListDeleteItemRequest = new TaskListDeleteItemRequest();
-        taskListDeleteItemRequest.setId(0L);
+        taskListDeleteItemRequest.setId("0");
 
         TaskListDomain taskListDomain = new TaskListDomain();
-        taskListDomain.setId(0L);
+        taskListDomain.setId("0");
 
         given(taskListConverter.convertDeleteRequest(taskListDeleteItemRequest)).willReturn(taskListDomain);
 
@@ -147,7 +147,7 @@ public class TaskListServiceTest {
     {
         //given
         TaskListGetUserListsRequest taskListGetUserListsRequest = new TaskListGetUserListsRequest();
-        taskListGetUserListsRequest.setUserId(0L);
+        taskListGetUserListsRequest.setUserId("0");
 
         TaskListGetUserListsDomain taskListGetUserListsDomain = new TaskListGetUserListsDomain();
         taskListGetUserListsDomain.setUserId(0L);
