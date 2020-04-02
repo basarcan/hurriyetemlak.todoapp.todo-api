@@ -179,7 +179,6 @@ public class TaskListServiceTest {
         assertThat(taskListGetListsResponseListUser.get(1).getTaskId()).isEqualTo("2");
         assertThat(taskListGetListsResponseListUser.get(1).getTaskTitle()).isEqualTo("secondTitle");
         assertThat(taskListGetListsResponseListUser.get(1).getTaskFavorite()).isEqualTo(false);
-
     }
 
 }
