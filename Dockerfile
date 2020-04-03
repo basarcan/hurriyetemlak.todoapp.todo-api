@@ -1,6 +1,6 @@
 FROM adoptopenjdk:11-jdk-openj9-bionic AS build-project
-ADD . ./todoApi
-WORKDIR /todoApi
+ADD . ./todo-api
+WORKDIR /todo-api
 RUN chmod +x mvnw
 RUN ./mvnw clean install -DskipTests
 
